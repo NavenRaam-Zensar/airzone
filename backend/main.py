@@ -11,15 +11,15 @@ import database as db
 from models import Zone, ZoneAircraft
 from opensky_client import OpenSkyError, fetch_states
 
-CACHE_SECONDS = 60                                        # repeat requests inside this window cost 0 credits
-DAILY_LIMIT = int(os.getenv("DAILY_CREDIT_LIMIT", "3000"))  # local safety cap
-cache = {}                                                # zone_id -> last response
+CACHE_SECONDS = 60                                        
+DAILY_LIMIT = int(os.getenv("DAILY_CREDIT_LIMIT", "3000"))
+cache = {}                                               
 usage = {"day": date.today(), "credits": 0}
 
 
 @asynccontextmanager
 async def lifespan(app):
-    db.init_db()  # create tables + seed zones on startup
+    db.init_db()  
     yield
 
 

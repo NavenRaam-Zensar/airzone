@@ -2,9 +2,9 @@ import re
 import sqlite3
 
 DB_FILE = "airzone.db"
-CELL = 4  # grid cell size in degrees (4x4 = 16 sq deg, the cheapest OpenSky credit tier)
+CELL = 4  
 
-# zone_id, name, lamin, lomin, lamax, lomax
+
 SEED = [
     ("mumbai", "Mumbai region", 17.5, 71.5, 20.5, 74.5),
     ("chennai", "Chennai region", 11.0, 78.0, 14.0, 81.0),
@@ -21,11 +21,11 @@ def connect():
 
 def init_db():
     with connect() as c:
-        # zones: one row per monitoring rectangle (seeded presets + grid cells once used)
+        
         c.execute("""CREATE TABLE IF NOT EXISTS zones (
             zone_id TEXT PRIMARY KEY, name TEXT NOT NULL,
             lamin REAL, lomin REAL, lamax REAL, lomax REAL)""")
-        # aircraft_observations: one row per saved snapshot of an aircraft (times are Unix seconds, UTC)
+        
         c.execute("""CREATE TABLE IF NOT EXISTS aircraft_observations (
             id INTEGER PRIMARY KEY AUTOINCREMENT, icao24 TEXT NOT NULL, callsign TEXT,
             origin_country TEXT, latitude REAL, longitude REAL, baro_altitude REAL,
@@ -70,7 +70,7 @@ def save_observations(aircraft, observed_at):
             last = c.execute("SELECT last_contact FROM aircraft_observations WHERE icao24=? "
                              "ORDER BY id DESC LIMIT 1", (a["icao24"],)).fetchone()
             if last and last["last_contact"] == a["last_contact"]:
-                continue  # nothing new since the last saved row
+                continue  
             c.execute("""INSERT INTO aircraft_observations (icao24, callsign, origin_country, latitude,
                 longitude, baro_altitude, velocity, true_track, on_ground, last_contact, observed_at)
                 VALUES (?,?,?,?,?,?,?,?,?,?,?)""",

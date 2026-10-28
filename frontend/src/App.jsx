@@ -7,13 +7,13 @@ import AircraftDetails from "./components/AircraftDetails";
 
 export default function App() {
   const [zones, setZones] = useState([]);
-  const [selected, setSelected] = useState(null);   // selected zone object
-  const [focus, setFocus] = useState(null);         // zone the map should fly to
-  const [data, setData] = useState(null);           // backend response for the zone
+  const [selected, setSelected] = useState(null);   
+  const [focus, setFocus] = useState(null);         
+  const [data, setData] = useState(null);           
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [aircraft, setAircraft] = useState(null);   // aircraft shown in the detail panel
-  const latest = useRef("");                        // ignore out-of-date responses
+  const [aircraft, setAircraft] = useState(null);   
+  const latest = useRef("");                        
 
   useEffect(() => {
     getZones().then(setZones).catch((e) => setError(e.message));

@@ -16,7 +16,6 @@ export const getZones = () => get("/zones");
 export const getZoneAircraft = (zoneId) => get(`/zones/${zoneId}/aircraft`);
 export const getAircraftHistory = (icao24) => get(`/aircraft/${icao24}`);
 
-// Display helpers: show a clear label when a value is missing.
 export const num = (v, unit = "", digits = 0) =>
   v === null || v === undefined ? "Not available" : `${Number(v).toFixed(digits)}${unit}`;
 export const text = (v) => (v === null || v === undefined || v === "" ? "Not available" : String(v));

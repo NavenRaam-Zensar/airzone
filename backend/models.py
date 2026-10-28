@@ -22,8 +22,8 @@ class Aircraft(BaseModel):
     latitude: Optional[float] = None
     baro_altitude: Optional[float] = None
     on_ground: Optional[bool] = None
-    velocity: Optional[float] = None        # metres per second (original)
-    velocity_kmh: Optional[float] = None    # converted for display
+    velocity: Optional[float] = None        
+    velocity_kmh: Optional[float] = None    
     true_track: Optional[float] = None
     vertical_rate: Optional[float] = None
     sensors: Optional[List[int]] = None
